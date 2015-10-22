@@ -1,0 +1,31 @@
+
+<textarea ng-model="message" style="width: 45%; height: 200px;">
+</textarea>
+<br/>
+<p>crypto key for crypting messaga</p>
+<input type="text" ng-model="cryptKey"> 
+<br />
+<input type="button" ng-click="cryptMsg(message, cryptKey)" value="send msg">
+<p>	
+{{cryptKey}} 
+</p>
+<br/>
+{{e}} <input ng-if="e !== undefined && e !== '' " type="button" ng-click="decryptMsg(e, cryptKey)" value="decrypt">
+<br/>
+<div>
+<br/>
+{{dec }}
+<br/>
+	
+<br />
+<div>
+<p>decrypt key for decrypting message</p>
+<input type="text" ng-model="decryptKey">
+</div>
+<ul>
+	<li ng-repeat="msg in msgArray" style="list-type: none;">
+	{{msg.msg | decrypt:decryptKey}} <input type="button" ng-click="removeMsg(msg.$id)" value="remove">
+	</li> 
+</ul>
+
+</div>
