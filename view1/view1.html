@@ -1,34 +1,38 @@
-<div>
+<div style="margin-bottom: 100px;">
 	
 	<!-- <div> -->
 		<label>decrypt key/keys for decrypting message</label>
 		<input type="text" ng-model="decryptKey" style="width: 45%;" />
 	<!-- </div> -->
 	<hr>
+	
+	<div>
 	<ul>
-		<li ng-repeat="msg in msgArray" style="list-style-type: none; margin: 8px; border-bottom: 1px solid #fff111;">
-		{{msg.msg | decrypt:decryptKey}} 
-		<input type="button" ng-click="removeMsg(msg.$id)" value="remove" style="margin-left: 15px; margin-bottom: 8px;">
-		</li> 
-	</ul>
+			<li ng-repeat="msg in msgArray" style="list-style-type: none; margin-top: 8px;">
+			{{msg.send | date: 'yyyy/MM/dd HH:mm.ss'}} {{msg.msg | decrypt:decryptKey}} 
+			<input type="button" ng-click="removeMsg(msg.$id)" value="remove" style="margin-left: 15px; margin-bottom: 8px;">
+			<hr>
+			</li> 
+		</ul>
+	</div>
 	<hr>
 </div>
 
-<div>
-	<label>crypto key for crypting messaga</label>
+<div style="width: 100%; position: fixed; bottom:10px; left:0; background: #ffffff; ">
+<div style="margin-bottom: 12px;">
+	<label>crypto key for crypting message: </label>
 	<input type="password" ng-model="cryptKey" />
 	{{cryptKey}} 
 </div>
 
-<div>
 	<input type="text" ng-model="message" style="width: 45%;" />
 	<input type="button" ng-click="cryptMsg(message, cryptKey)" value="send msg" />
+<!-- <div> -->
+	{{e}} <input ng-if="e !== undefined && e !== '' " type="button" ng-click="decryptMsg(e, cryptKey)" value="decrypt">
+	{{dec }}
+<!-- </div> -->
 </div>
 
  
 
-<div>
-	{{e}} <input ng-if="e !== undefined && e !== '' " type="button" ng-click="decryptMsg(e, cryptKey)" value="decrypt">
-	{{dec }}
-</div>
 

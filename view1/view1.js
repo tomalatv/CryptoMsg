@@ -18,12 +18,12 @@ angular.module('myApp.view1', ['ngRoute', 'firebase'])
 	$scope.msgArray = $firebaseArray(firebRef);
 
 	$scope.cryptMsg = function (msg, cryptKey) {
-		console.log('crypt ', cryptKey);
+		var now = moment();
 		if(cryptKey !== undefined &&  cryptKey !== ''
 			&& msg !== undefined && msg !== '') {
 			var cryptedMsg = CryptoJS.AES.encrypt(msg, cryptKey);
 			$scope.e = cryptedMsg.toString();
-			var data = JSON.parse('{ "msg": "' + cryptedMsg.toString() + '"}');
+			var data = JSON.parse('{ "msg": "' + cryptedMsg.toString() + '", "send": "' + now + '" }');
 			firebRef.push(data);
 		}
 	}
