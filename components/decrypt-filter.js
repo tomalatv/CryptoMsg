@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.decrypt-filter', [])
+angular.module('cryptoMsg.decrypt-filter', [])
 /**
 * decryption filter for decrypt crypted messages at application message view
 * @param msg crypted message string

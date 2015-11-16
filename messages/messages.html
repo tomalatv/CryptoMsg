@@ -1,0 +1,28 @@
+<!-- style="margin-bottom: 100px;" -->
+
+<div class="" >
+    <label>decrypt key/keys for decrypting message</label>
+    <input type="text" ng-model="decryptKey" style="width: 45%;" />
+    <hr>
+</div>
+
+<!-- style="width: 100%; position: fixed; top: 110px; bottom: 70px; overflow: scroll;  -->
+      <!-- overflow-x: hidden; margin-top: 20px;" -->
+<div class="" >
+    <div ng-repeat="msg in msgArray" style="padding-left: 20px; margin-top: 8px;">
+        {{msg.send | date: 'yyyy/MM/dd HH:mm.ss'}} {{msg.msg | decrypt:decryptKey}}
+        
+        <i class="fa fa-trash-o close" ng-click="removeMsg(msg.$id)"></i>
+
+        <hr style="margin-left: -20px; padding-left: -20px; border-color: red; ">
+    </div>
+</div>
+<!-- style="width: 100%; position: fixed; bottom:10px; left:0; background: #ffffff; " -->
+<div class="" >
+    <div style="margin-bottom: 12px;">
+        <label>crypto key for crypting message: </label>
+        <input type="password" ng-model="cryptKey" /> {{cryptKey}}
+    </div>
+    <input type="text" ng-model="message" style="width: 45%;" />
+    <input type="button" ng-click="cryptMsg(message, cryptKey)" value="send msg" />
+</div>
