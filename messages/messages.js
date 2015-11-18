@@ -13,12 +13,11 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
     var url = 'https://cryptomsg.firebaseio.com/msgs';
     var firebRef = new Firebase(url);
     $scope.dec = '';
-
+    $scope.scrollEnabled = true;
     var msg = $firebaseArray(firebRef);
     $scope.msgArray = '';
     msg.$loaded()
     .then(function(msgs) {
-    	console.log('on load scroll last');
     	$scope.msgArray = msgs;
     })
     .catch(function(err) {
@@ -35,6 +34,11 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
             var cryptedMsg = CryptoJS.AES.encrypt(msg, cryptKey);
             var data = JSON.parse('{ "msg": "' + cryptedMsg.toString() + '", "send": "' + now + '" }');
             firebRef.push(data);
+            $scope.message = '';
+        } else if(msg !== undefined && msg !== ''){
+        	var data = JSON.parse('{ "msg": "' + msg + '", "send": "' + now + '" }');
+            firebRef.push(data);
+            $scope.message = '';
         }
     }
 
@@ -61,9 +65,9 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
      * @return {void}
      */
     $scope.scrollToLastMsg = function() {
-    	$location.hash("last");
-    	$anchorScroll();
+        if ($scope.scrollEnabled) {
+            $location.hash("lastmsg");
+            $anchorScroll();
+        }
     }
-    
-
 });
