@@ -14,6 +14,7 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
     var firebRef = new Firebase(url);
     $scope.dec = '';
     $scope.scrollEnabled = true;
+    $scope.cryptEnabled = true;
     var msg = $firebaseArray(firebRef);
     $scope.msgArray = '';
     msg.$loaded()
