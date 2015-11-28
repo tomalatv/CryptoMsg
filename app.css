@@ -1,33 +1,4 @@
 /* app css stylesheet */
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
-}
-
-.menu:before {
-  content: "[";
-}
-
-.menu:after {
-  content: "]";
-}
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
-}
 .r90deg {
     -webkit-transform: rotate(90deg); /* Safari and Chrome */
     -moz-transform: rotate(90deg);   /* Firefox */
@@ -35,3 +6,102 @@
     -o-transform: rotate(90deg);   /* Opera */
     transform: rotate(90deg);
 }
+.fader {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  background-color: rgba(223, 226, 35, 0.2);
+  z-index: 10; 
+}
+
+.menu-toggle {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 5px 11px;
+  color: #222;
+  z-index: 999; }
+
+.menu-toggle:hover {
+  color: #555; }
+
+.toggle-me {
+  font-size: 2em; }
+
+.menu {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 300px;
+  overflow: hidden;
+  cursor: default;
+  color: #c8c8c8;
+  background: #222;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -moz-transition: width ease-in-out 0.28s, background linear 0.1s;
+  -webkit-transition: width ease-in-out 0.28s, background linear 0.1s;
+  -o-transition: width ease-in-out 0.28s, background linear 0.1s;
+  transition: width ease-in-out 0.28s, background linear 0.1s;
+  -ms-transform: translate(0px, 0);
+  -moz-transform: translate(0px, 0);
+  -webkit-transform: translate3d(0px, 0, 0);
+  transform: translate(0px, 0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  display: none;
+}
+
+.menu.open {
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  transform: translateX(0px);
+  width: 300px;
+  height: 100%;
+  display: block;
+  z-index: 120;
+}
+
+.scroll {
+  position: absolute;
+  overflow-y: scroll;
+  width: 100%;
+  height: 100%; }
+
+.menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-weight: 300; }
+
+.menu li {
+  display: block; }
+
+.menu a {
+  display: block;
+  height: 100%;
+  width: 100%;
+  color: #aaa;
+  text-decoration: none;
+  cursor: pointer;
+  border-bottom: 1px solid #353434;
+  padding: 13px 10px;
+  transition: 0.3s ease all; }
+
+.menu a:hover {
+  background-color: #111; }
+
+.menu a i {
+  font-size: 23px;
+  float: right;
+  padding: 0 15px 0 4px; }
+
+.menu a.moveleft {
+  padding-left: 53px; }

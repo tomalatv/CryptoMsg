@@ -1,0 +1,24 @@
+<a class="menu-toggle toggle-me" ng-click="showMenu = !showMenu" ng-show="!showMenu">
+    <span class="glyphicon glyphicon-menu-hamburger"></span>
+</a>
+<nav class="menu" ng-class="showMenu ? 'open' : ''">
+    <ul>
+        <li>
+            <a ng-click="showMenu = !showMenu">&nbsp; 
+                <i class="glyphicon glyphicon-remove pull-right"></i>
+            </a>
+        </li>
+        <li>
+            <a ng-click="scrollEnabled = !scrollEnabled">auto scroll {{scrollEnabled ? 'on': 'off'}}
+                <i class="pull-right" ng-class="scrollEnabled ? 'fa fa-toggle-on' : 'fa fa-toggle-off'"></i>
+            </a>
+        </li>
+        <li ng-class="(cryptKey === undefined  || cryptKey === '' )? 'disabled' : ''">
+            <a ng-click="cryptEnabled = !cryptEnabled">message cryption {{cryptEnabled ? 'on': 'off'}}
+                <i class="pull-right" ng-class="cryptEnabled  ? 'fa fa-toggle-on' : 'fa fa-toggle-off'"></i>
+            </a>
+        </li>
+        <li><a href="#">select cryption key </a></li>
+        <li><a href="#">add new key</a></li>
+    </ul>
+</nav>

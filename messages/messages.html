@@ -1,54 +1,19 @@
 
-<div class="container" style="z-index: 100; position: fixed; left: 0; top: 0; background: lightgray; width: 100%;">
-auto scroll {{scrollEnabled ? 'on': 'off'}}
-    <div class="dropdown pull-right">
-        <i class="glyphicon glyphicon-menu-hamburger dropdown-toggle" data-toggle="dropdown"></i>
-        <ul class="dropdown-menu dropdown-menu-right">
-            <li> <a ng-click="scrollEnabled = !scrollEnabled">auto scroll {{scrollEnabled ? 'on': 'off'}}
-                <i class="pull-right" ng-class="scrollEnabled ? 'fa fa-toggle-on' : 'fa fa-toggle-off'"></i></a> 
-                </li>
-                <li ng-class="(cryptKey === undefined  || cryptKey === '' )? 'disabled' : ''"> <a ng-click="cryptEnabled = !cryptEnabled">message cryption {{cryptEnabled ? 'on': 'off'}}
-                <i ng-class="cryptEnabled  ? 'fa fa-toggle-on' : 'fa fa-toggle-off'"></i></a> </li> 
-                <li>crypt messages</li>
-        </ul>
-    </div>
-<!-- <div class="form-group"> -->
-<!-- </div> -->
-
-    <!-- <div class="form-inline">
-        <div class="form-group">
-            <label>decrypt key/keys for decrypting message</label>
-            <input class="form-control" type="text" ng-model="decryptKey" style="width: 45%;" />
-        </div>
-        <label class="pull-right"> auto scroll {{scrollEnabled ? 'on': 'off'}}
-            <i class="r90deg" ng-class="scrollEnabled ? 'fa fa-toggle-on' : 'fa fa-toggle-off'" ng-click="scrollEnabled = !scrollEnabled" style="font-size: 32px;"></i> </label> -->
-        <!-- <div class="form-group" style="float: right;">
-    </div> -->
-    <!-- </div> -->
-</div>
-
+<nav-menu></nav-menu>
 
 <div class="container" style="position: relative; top: 32px; z-index: 80; margin-bottom: 120px;">
-    <!-- <ul> -->
         <div ng-repeat="msg in msgArray" style="padding-left: 20px; margin-top: 8px;">
             <span style="margin-left: -20px; font-weight: bold; padding-right: 12px;">{{msg.send | date: 'dd/MM'}}</span> {{msg.msg | decrypt:decryptKey}} {{msg.send | date: 'HH:mm.ss'}}
             <span ng-if="$last" id="lastmsg"> {{::scrollToLastMsg()}} </span>
             <i class="fa fa-trash-o close" ng-click="removeMsg(msg.$id)"></i>
             <hr ng-hide="$last" style="margin-left: -20px; padding-left: -20px; border-color: red; ">
         </div>
-    <!-- </ul> -->
 </div>
 
-<!-- <div style="width: 100%; position: fixed; bottom: 0px; left:0; background: lightgray; height: 60px; z-index:100;"> -->
 <div class="container" style="position: fixed; bottom: 0; width:100%; background: lightgray; z-index: 100;">
-    <!-- <div class="form-group" style="margin-bottom: 10px;">
-        <label>crypto key for crypting message: </label>
-        <input class="form-control" type="password" ng-model="cryptKey" /> {{cryptKey}}
-    </div> -->
     <div class="form-group">
         <input class="form-control" type="text" ng-model="message" placeholder="write message" ng-keydown="$event.which == 13 && sendCryptMsg(message, cryptKey)" />
 
     </div>
         <div class="form-group"><button class="btn btn-primary form-control" ng-click="sendCryptMsg(message, cryptKey)"> Send message</button></div>
 </div>
-
