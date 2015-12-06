@@ -7,7 +7,6 @@ angular.module('cryptoMsg.services', ['ngCookies'])
 
         this.getAutoScroll = function() {
             var _scroll = $cookies.get('autoScroll');
-            console.log('GET Auto Scroll', _scroll);
             switch (_scroll) {
                 case 'true':
                     _scroll = true;
