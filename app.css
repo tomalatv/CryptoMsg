@@ -15,7 +15,15 @@
   background-color: rgba(223, 226, 35, 0.2);
   z-index: 10; 
 }
-
+.menu-bar {
+   width: 100%;
+   top: 0;
+   left: 0;
+   background-color: rgba(249, 249, 211, 1);
+   height: 42px;
+   position: fixed;
+   z-index: 100;
+}
 .menu-toggle {
   position: fixed;
   top: 0;

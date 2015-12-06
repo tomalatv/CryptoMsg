@@ -1,10 +1,14 @@
-<a class="menu-toggle toggle-me" ng-click="showMenu = !showMenu" ng-show="!showMenu">
-    <span class="glyphicon glyphicon-menu-hamburger"></span>
-</a>
+<div class="menu-bar">
+<span style="margin-left: 10px;">scroll {{scrollEnabled ? 'on': 'off'}}</span>
+    <a class="menu-toggle toggle-me" ng-click="showMenu = !showMenu" ng-show="!showMenu">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </a>
+</div>
+
 <nav class="menu" ng-class="showMenu ? 'open' : ''">
     <ul>
         <li>
-            <a ng-click="showMenu = !showMenu">&nbsp; 
+            <a ng-click="showMenu = !showMenu">CLOSE 
                 <i class="glyphicon glyphicon-remove pull-right"></i>
             </a>
         </li>
