@@ -3,7 +3,6 @@
 // Declare app level module which depends on views, and components
 angular.module('cryptoMsg', [
   'ngRoute',
-  'ngCookies',
   'cryptoMsg.messages',
   'cryptoMsg.menu',
   'cryptoMsg.decrypt-filter',
