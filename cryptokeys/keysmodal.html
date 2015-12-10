@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <h3 class="modal-title">Crypto keys</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputKeyid"> Key id </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputKeyid" ng-model="key.id" placeholder="Key id" required="" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputKeyvalue"> Key </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputKeyvalue" ng-model="key.value" placeholder="key"
+                required="">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" ng-click="addToKeychain()" ng-disabled="key.id === undefined  || key.value === undefined " class="btn btn-default">Add key to keychain</button>
+            </div>
+        </div>
+        <div class="form-group" ng-repeat="key in keychain">
+      
+        <label class="col-sm-2 control-label">
+          <input type="checkbox" ng-checked="key.use" ng-click="selectCryptionKey(key)">
+        </label>
+            <div class="col-sm-10">
+                {{key.id}}: {{key.key}} {{key.use}} {{$index}}
+                <i class="fa fa-trash-o close" ng-click="keychain.splice($index, 1)"></i>
+            </div>
+        </div>
+<!-- 
+    <div class="col-sm-offset-2 col-sm-10">
+        <ul>
+            <li ng-repeat="key in keychain">
+             {{key.id}} : {{key.key}} 
+        </ul>
+    </div> -->
+    <!-- <div class="col-sm-offset-2 col-sm-10">
+        {{keychain | json}}
+    </div> -->
+    </form>
+
+
+    
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

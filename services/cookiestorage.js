@@ -3,7 +3,7 @@ angular.module('cryptoMsg.services', ['ngCookies'])
 
         this.setAutoScroll = function(value) {
             $cookies.put('autoScroll', value);
-        }
+        };
 
         this.getAutoScroll = function() {
             var _scroll = $cookies.get('autoScroll');
@@ -19,5 +19,13 @@ angular.module('cryptoMsg.services', ['ngCookies'])
                     break;
             }
             return _scroll;
-        }
+        };
+
+        this.getCryptoKeychain = function () {
+            return $cookies.getObject('cryptoKeychain');
+        };
+
+        this.setCryptoKeychain = function (keys){
+            $cookies.putObject('cryptoKeychain', keys);
+        };
     });
