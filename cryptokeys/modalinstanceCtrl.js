@@ -2,7 +2,7 @@ angular.module('cryptoMsg.cryptokeys', [])
   .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, CookieStorage) {
   var _keys = [];
   $scope.keychain = undefined;
-  CookieStorage.getCryptoKeychain() === undefined ? _keys = [] :_keys = CookieStorage.getCryptoKeychain();
+  if (CookieStorage.getCryptoKeychain() === undefined ? _keys = [] :_keys = CookieStorage.getCryptoKeychain());
   $scope.keychain = _keys;
 
   $scope.ok = function () {
@@ -24,7 +24,7 @@ angular.module('cryptoMsg.cryptokeys', [])
       '", "use": ' +false +'}'));
     $scope.key.id = undefined;
     $scope.key.value = undefined;
-  }
+  };
 
   $scope.selectCryptionKey = function (key) {
     _.find($scope.keychain, function(item) {
@@ -33,7 +33,7 @@ angular.module('cryptoMsg.cryptokeys', [])
         }else {
           item.use = false;
         }
-    })
-  }
+    });
+  };
 
 });

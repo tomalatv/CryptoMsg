@@ -9,7 +9,7 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
     });
 }])
 
-.controller('MessagesCtrl', function($scope, $firebaseArray, $location, $anchorScroll) {
+.controller('MessagesCtrl', function($scope, $firebaseArray, $location, $anchorScroll, CookieStorage) {
     var url = 'https://cryptomsg.firebaseio.com/msgs';
     var firebRef = new Firebase(url);
     $scope.dec = '';
@@ -30,18 +30,19 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
 	 * @return {void}
 	 */
     $scope.sendCryptMsg = function(msg, cryptKey) {
-        var now = moment();
+        var _now = moment();
+        var _msg = '';
         if (cryptKey !== undefined && cryptKey !== '' && msg !== undefined && msg !== '') {
             var cryptedMsg = CryptoJS.AES.encrypt(msg, cryptKey);
-            var data = JSON.parse('{ "msg": "' + cryptedMsg.toString() + '", "send": "' + now + '" }');
-            firebRef.push(data);
+            _msg = JSON.parse('{ "msg": "' + cryptedMsg.toString() + '", "send": "' + _now + '" }');
+            firebRef.push(_msg);
             $scope.message = '';
         } else if(msg !== undefined && msg !== ''){
-        	var data = JSON.parse('{ "msg": "' + msg + '", "send": "' + now + '" }');
-            firebRef.push(data);
+        	_msg = JSON.parse('{ "msg": "' + msg + '", "send": "' + _now + '" }');
+            firebRef.push(_msg);
             $scope.message = '';
         }
-    }
+    };
 
     $scope.decryptMsg = function(msg, cryptKey) {
         if (cryptKey !== undefined && cryptKey !== '' && msg !== undefined && msg !== '') {
@@ -52,7 +53,7 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
                 $scope.dec = msg;
             }
         }
-    }
+    };
     /**
      * @param  {msgId} messages id to be removed form firebase
      * @return {void}
@@ -60,7 +61,7 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
     $scope.removeMsg = function(msgId) {
         console.log("REMOVE: ", msgId);
         firebRef.child(msgId).remove();
-    }
+    };
     /**
      * scroll end of messagas when view load's last message form firebase
      * @return {void}
@@ -70,5 +71,10 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
             $location.hash("lastmsg");
             $anchorScroll();
         }
+    };
+
+    $scope.decryptKeys = undefined;
+    if(CookieStorage.getCryptoKeychain() !== undefined) {
+        $scope.decryptKeys = CookieStorage.getCryptoKeychain();
     }
 });

@@ -27,20 +27,10 @@
           <input type="checkbox" ng-checked="key.use" ng-click="selectCryptionKey(key)">
         </label>
             <div class="col-sm-10">
-                {{key.id}}: {{key.key}} {{key.use}} {{$index}}
+                {{key.id}}: {{key.key}}
                 <i class="fa fa-trash-o close" ng-click="keychain.splice($index, 1)"></i>
             </div>
         </div>
-<!-- 
-    <div class="col-sm-offset-2 col-sm-10">
-        <ul>
-            <li ng-repeat="key in keychain">
-             {{key.id}} : {{key.key}} 
-        </ul>
-    </div> -->
-    <!-- <div class="col-sm-offset-2 col-sm-10">
-        {{keychain | json}}
-    </div> -->
     </form>
 
 

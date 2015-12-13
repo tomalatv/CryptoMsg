@@ -22,7 +22,9 @@
                 <i class="pull-right" ng-class="cryptEnabled  ? 'fa fa-toggle-on' : 'fa fa-toggle-off'"></i>
             </a>
         </li>
-        <li><a >select cryption key </a></li>
         <li><a ng-click="openCryptoKeys()">crypto keys</a></li>
+
+        <li>&nbsp; <b>decrytion keys in use:</b></li>
+        <li ng-repeat="key in keysInchain"><a>{{key.id}}</a></li>
     </ul>
 </nav>
