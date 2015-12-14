@@ -113,3 +113,8 @@
 
 .menu a.moveleft {
   padding-left: 53px; }
+
+.cryptokey-highlight {
+  color: red !important;
+  font-weight: bold;
+}

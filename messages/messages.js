@@ -26,32 +26,22 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
     });
 	/**
 	 * @param  {msg} user writen message to be crypted 
-	 * @param  {cryptKey} user seted crypting key for message
 	 * @return {void}
 	 */
-    $scope.sendCryptMsg = function(msg, cryptKey) {
+    $scope.sendCryptMsg = function(msg) {
         var _now = moment();
         var _msg = '';
-        if (cryptKey !== undefined && cryptKey !== '' && msg !== undefined && msg !== '') {
-            var cryptedMsg = CryptoJS.AES.encrypt(msg, cryptKey);
-            _msg = JSON.parse('{ "msg": "' + cryptedMsg.toString() + '", "send": "' + _now + '" }');
+        var _cryptKey = getCryptionKey();
+
+        if (_cryptKey !== undefined && _cryptKey !== '' && msg !== undefined && msg !== '') {
+            var _cryptedMsg = CryptoJS.AES.encrypt(msg, _cryptKey);
+            _msg = JSON.parse('{ "msg": "' + _cryptedMsg.toString() + '", "send": "' + _now + '" }');
             firebRef.push(_msg);
             $scope.message = '';
         } else if(msg !== undefined && msg !== ''){
         	_msg = JSON.parse('{ "msg": "' + msg + '", "send": "' + _now + '" }');
             firebRef.push(_msg);
             $scope.message = '';
-        }
-    };
-
-    $scope.decryptMsg = function(msg, cryptKey) {
-        if (cryptKey !== undefined && cryptKey !== '' && msg !== undefined && msg !== '') {
-            var decryptedMsg = CryptoJS.AES.decrypt(msg, cryptKey);
-            if (decryptedMsg.toString() !== '' && decryptedMsg.toString() !== undefined) {
-                $scope.dec = decryptedMsg.toString(CryptoJS.enc.Utf8);
-            } else {
-                $scope.dec = msg;
-            }
         }
     };
     /**
@@ -76,5 +66,15 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
     $scope.decryptKeys = undefined;
     if(CookieStorage.getCryptoKeychain() !== undefined) {
         $scope.decryptKeys = CookieStorage.getCryptoKeychain();
+    }
+
+    function getCryptionKey() {
+        var _key = undefined;
+        _.find($scope.decryptKeys, function(item){
+            if(item.use === true){
+                _key = item.key;
+            } 
+        });
+        return _key;
     }
 });

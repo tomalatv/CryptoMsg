@@ -1,5 +1,4 @@
 <div class="menu-bar">
-<span style="margin-left: 10px;">scroll {{scrollEnabled ? 'on': 'off'}}</span>
     <a class="menu-toggle toggle-me" ng-click="showMenu = !showMenu" ng-show="!showMenu">
         <span class="glyphicon glyphicon-menu-hamburger"></span>
     </a>
@@ -17,14 +16,10 @@
                 <i class="pull-right" ng-class="scrollEnabled ? 'fa fa-toggle-on' : 'fa fa-toggle-off'"></i>
             </a>
         </li>
-        <li ng-class="(cryptKey === undefined  || cryptKey === '' )? 'disabled' : ''">
-            <a ng-click="cryptEnabled = !cryptEnabled">message cryption {{cryptEnabled ? 'on': 'off'}}
-                <i class="pull-right" ng-class="cryptEnabled  ? 'fa fa-toggle-on' : 'fa fa-toggle-off'"></i>
-            </a>
-        </li>
         <li><a ng-click="openCryptoKeys()">crypto keys</a></li>
-
-        <li>&nbsp; <b>decrytion keys in use:</b></li>
-        <li ng-repeat="key in keysInchain"><a>{{key.id}}</a></li>
+        <li>&nbsp; <b>decryption keys in use:</b></li>
+        <li ng-repeat="key in keysInchain">
+        <a ng-class="key.use === true ? 'cryptokey-highlight' : ''" ng-click="useAtCryption(key)">{{key.id}}
+        </a></li>
     </ul>
 </nav>

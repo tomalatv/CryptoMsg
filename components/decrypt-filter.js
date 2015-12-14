@@ -14,14 +14,20 @@ angular.module('cryptoMsg.decrypt-filter', [])
                 var _dec = '';
 
                 for (var i = 0; i < cryptKeys.length; i++) {
-                    _dec = CryptoJS.AES.decrypt(msg, cryptKeys[i].key);
-
+                     _dec = CryptoJS.AES.decrypt(msg, cryptKeys[i].key);
+                   
                     if (_dec.toString() !== '') {
                         break;
                     }
                 }
                 if (_dec.toString() !== '' && _dec.toString() !== undefined) {
-                    return _dec.toString(CryptoJS.enc.Utf8);
+                    try{
+                        return _dec.toString(CryptoJS.enc.Utf8);
+                    }catch(err){
+                        //this is for temporary fix for Cryptojs 
+                        //Malformed UTF-8 error
+                        // console.log(err);
+                    }
                 }
             }
 

@@ -12,8 +12,8 @@
 <div class="container" style="position: fixed; width:100%; bottom: 0; background: lightgray; z-index: 100;">
     <div class="row">
         <div class="form-group">
-            <input class="form-control" style="display: inline; width: 89%;" type="text" ng-model="message" placeholder="write message" ng-keydown="$event.which == 13 && sendCryptMsg(message, cryptKey)" />
-            <button class="btn btn-primary form-control" style="display: inline; width: 10%;" ng-click="sendCryptMsg(message, cryptKey)">
+            <input class="form-control" style="display: inline; width: 89%;" type="text" ng-model="message" placeholder="write message" ng-keydown="$event.which == 13 && sendCryptMsg(message)" />
+            <button class="btn btn-primary form-control" style="display: inline; width: 10%;" ng-click="sendCryptMsg(message)">
                 <i class="glyphicon glyphicon-send"></i></button>
         </div>
     </div>

@@ -46,16 +46,29 @@ angular.module('cryptoMsg.menu', [])
                 };
 
                 function checkKeychain() {
-	                if (CookieStorage.getCryptoKeychain() !== undefined){
-	                	$scope.keysInchain = CookieStorage.getCryptoKeychain();
-	                	$scope.decryptKeys = $scope.keysInchain;
-	                } else {
-	                	$scope.keysInchain = [];
-	                	$scope.decryptKeys = [];
-	                }
+                    if (CookieStorage.getCryptoKeychain() !== undefined) {
+                        $scope.keysInchain = CookieStorage.getCryptoKeychain();
+                        $scope.decryptKeys = $scope.keysInchain;
+                    } else {
+                        $scope.keysInchain = [];
+                        $scope.decryptKeys = [];
+                    }
                 };
 
                 checkKeychain();
+
+                $scope.useAtCryption = function(key) {
+                    var _keys = CookieStorage.getCryptoKeychain();
+                    _.find(_keys, function(item) {
+                        if (item.id === key.id && key.use === false) {
+                            item.use = true;
+                        } else {
+                            item.use = false;
+                        }
+                    });
+                    CookieStorage.setCryptoKeychain(_keys);
+                    checkKeychain();
+                };
             },
         };
     }]);
