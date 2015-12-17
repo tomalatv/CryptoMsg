@@ -1,14 +1,15 @@
 #Crypto message client demo
 
-This is testin demo for client side message cryption by using
-firebase as realtime communication backend
+This demo is for testing client side message cryption and storing it to
+firebase realtime backend
 
-###project seed from 
+### Project seed from 
 
 [angular-seed](https://github.com/angular/angular-seed)
 
 ### Used frameworks and libraries
-at this demo following technologies, frameworks and libraries where used
+
+Following technologies, frameworks and libraries where used at this project:
 
 
 [Underscore 1.8.3](http://underscorejs.org)
