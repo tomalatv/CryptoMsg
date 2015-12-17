@@ -3,8 +3,8 @@
 angular.module('cryptoMsg.decrypt-filter', [])
     /**
      * decryption filter for decrypt crypted messages at application message view
+     * gets encryption keys from cookie storage
      * @param msg crypted message string
-     * @param cryptKey key string for encrypt messages can be contain multiple key separated by space
      * @return crypted/encrypted message string depence on crypto key value 
      */
     .filter('decrypt', [function() {

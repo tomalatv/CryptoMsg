@@ -2,33 +2,26 @@
 
 angular.module('cryptoMsg.menu', [])
     .directive('navMenu', [function() {
-        // Runs during compile
         return {
-            // name: '',
-            // priority: 1,
-            // terminal: true,
-            // scope: {
-            // 	decryptKeys: '=',
-            // 	scrollEnabled: '='
-            // }, // {} = isolate, true = child, false/undefined = no change
-            // require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
-            restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
+            restrict: 'E', 
             templateUrl: 'menu/menu.html',
-            // replace: true,
-            // transclude: true,
-            // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
             link: function($scope, iElm, iAttrs, controller) {
                 $scope.showMenu = false;
             },
             controller: function($scope, $element, $attrs, $transclude, CookieStorage, $uibModal) {
                 $scope.scrollEnabled = CookieStorage.getAutoScroll();
                 $scope.keysInchain = [];
-
+                /**
+                 * enables/disables automatic message view scrolling
+                 */
                 $scope.setAutoScroll = function() {
                     $scope.scrollEnabled = !$scope.scrollEnabled;
                     CookieStorage.setAutoScroll($scope.scrollEnabled);
                 };
-
+                /**
+                 * Opens crypto keys manipulation modal
+                 * @return {void} 
+                 */
                 $scope.openCryptoKeys = function() {
                     $scope.showMenu = false;
                     var modalInstance = $uibModal.open({
@@ -38,13 +31,14 @@ angular.module('cryptoMsg.menu', [])
                     });
 
                     modalInstance.result.then(function() {
-                        // console.log('modal ok close');
                         checkKeychain();
                     }, function() {
-                        // console.log('Modal dismissed at: ' + new Date());
                     });
                 };
-
+                /**
+                 * check the crytion keychain for updating view values 
+                 * @return {[type]} [description]
+                 */
                 function checkKeychain() {
                     if (CookieStorage.getCryptoKeychain() !== undefined) {
                         $scope.keysInchain = CookieStorage.getCryptoKeychain();
@@ -56,7 +50,13 @@ angular.module('cryptoMsg.menu', [])
                 };
 
                 checkKeychain();
-
+                /**
+                 * changes use value at cryption key object 
+                 * when it is clicked at menu and update it to
+                 * cookie storage
+                 * @param  {Json object} key json object
+                 * @return {void}
+                 */
                 $scope.useAtCryption = function(key) {
                     var _keys = CookieStorage.getCryptoKeychain();
                     _.find(_keys, function(item) {

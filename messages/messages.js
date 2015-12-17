@@ -14,7 +14,7 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
     var firebRef = new Firebase(url);
     $scope.dec = '';
     $scope.scrollEnabled = true;
-    $scope.cryptEnabled = true;
+
     var msg = $firebaseArray(firebRef);
     $scope.msgArray = '';
     msg.$loaded()
@@ -25,7 +25,7 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
     	console.log('messages cannot loaded !!', err);
     });
 	/**
-	 * @param  {msg} user writen message to be crypted 
+	 * @param  {msg} add new message to firebase crypted or uncrypted 
 	 * @return {void}
 	 */
     $scope.sendCryptMsg = function(msg) {
@@ -45,15 +45,14 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
         }
     };
     /**
-     * @param  {msgId} messages id to be removed form firebase
+     * @param  {msgId} removes messages by message id form firebase
      * @return {void}
      */
     $scope.removeMsg = function(msgId) {
-        console.log("REMOVE: ", msgId);
         firebRef.child(msgId).remove();
     };
     /**
-     * scroll end of messagas when view load's last message form firebase
+     * scrolls to last message when view load's last message form firebase
      * @return {void}
      */
     $scope.scrollToLastMsg = function() {
@@ -67,7 +66,10 @@ angular.module('cryptoMsg.messages', ['ngRoute', 'firebase'])
     if(CookieStorage.getCryptoKeychain() !== undefined) {
         $scope.decryptKeys = CookieStorage.getCryptoKeychain();
     }
-
+    /**
+     * gets selected cryption key which is stored at cookie storage 
+     * @return {string} encryption key
+     */
     function getCryptionKey() {
         var _key = undefined;
         _.find($scope.decryptKeys, function(item){
